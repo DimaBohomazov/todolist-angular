@@ -1,0 +1,30 @@
+<li
+  *ngIf='!hidden'
+  [attr.data-id]="todo.id"
+  [ngClass]="{
+    completed: todo.status,
+    editing: editable
+  }"
+>
+  <div class="view">
+    <input 
+      (click)="toggleStatus()"
+      class="toggle" 
+      type="checkbox" 
+      [checked]="todo.status"
+    />
+    <label (dblclick)="setEditable(true)"> {{ todo.name }} </label>
+    <button
+      (click)='removeItem()'
+      class="destroy"></button>
+  </div>
+  <input 
+    *ngIf="editable"
+    [(ngModel)]="internalName"
+    (keydown)="editTodoHandler($event)"
+    (blur)="editTodoHandler($event)"
+    class="edit"
+    type="text"
+    FOCUS
+  />
+</li>
